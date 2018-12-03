@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="simpletaghistoryprovider-build" />
+        <module name="simpletaghistoryprovider-gateway" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="simpletaghistoryprovider-client" target="1.6" />
+      <module name="simpletaghistoryprovider-common" target="1.6" />
+      <module name="simpletaghistoryprovider-designer" target="1.6" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <artifactId>simpletaghistoryprovider</artifactId>
+        <groupId>org.ignitionmdc.simpletaghistoryprovider</groupId>
+        <version>1.0.0</version>
+    </parent>
+
+    <artifactId>simpletaghistoryprovider-build</artifactId>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.ignitionmdc.simpletaghistoryprovider</groupId>
+            <artifactId>simpletaghistoryprovider-gateway</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.inductiveautomation.ignitionsdk</groupId>
+                <artifactId>ignition-maven-plugin</artifactId>
+                <version>1.0.12</version>
+
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>modl</goal>
+                        </goals>
+                    </execution>
+                </executions>
+
+                <configuration>
+                    <projectScopes>
+                        <projectScope>
+                            <name>simpletaghistoryprovider-gateway</name>
+                            <scope>G</scope>
+                        </projectScope>
+                    </projectScopes>
+
+                    <moduleId>org.ignitionmdc.simpletaghistoryprovider</moduleId>
+                    <moduleName>${project.parent.name}</moduleName>
+                    <moduleDescription>${project.description}</moduleDescription>
+                    <moduleVersion>1.0.0</moduleVersion>
+                    <requiredIgnitionVersion>7.9.0</requiredIgnitionVersion>
+
+                    <hooks>
+                        <hook>
+                            <scope>G</scope>
+                            <hookClass>org.ignitionmdc.simpletaghistoryprovider.GatewayHook</hookClass>
+                        </hook>
+                    </hooks>
+
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
