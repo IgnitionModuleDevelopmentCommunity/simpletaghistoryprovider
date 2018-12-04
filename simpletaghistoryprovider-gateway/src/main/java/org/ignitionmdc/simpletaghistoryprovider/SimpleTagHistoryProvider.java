@@ -2,11 +2,9 @@ package org.ignitionmdc.simpletaghistoryprovider;
 
 import com.inductiveautomation.ignition.common.Path;
 import com.inductiveautomation.ignition.common.QualifiedPath;
+import com.inductiveautomation.ignition.common.QualifiedPathUtils;
 import com.inductiveautomation.ignition.common.WellKnownPathTypes;
-import com.inductiveautomation.ignition.common.browsing.BrowseFilter;
-import com.inductiveautomation.ignition.common.browsing.BrowseResults;
-import com.inductiveautomation.ignition.common.browsing.Result;
-import com.inductiveautomation.ignition.common.browsing.TagResult;
+import com.inductiveautomation.ignition.common.browsing.*;
 import com.inductiveautomation.ignition.common.model.values.BasicQuality;
 import com.inductiveautomation.ignition.common.model.values.Quality;
 import com.inductiveautomation.ignition.common.sqltags.history.Aggregate;
@@ -91,14 +89,28 @@ public class SimpleTagHistoryProvider implements TagHistoryProvider {
         //logger.info("HistoryQueryExecutor.browse(qualifiedPath, browseFilter) called.  qualifiedPath: "+qualifiedPath.toString()+", browseFilter: "+browseFilter.toString());
         BrowseResults<Result> result = new BrowseResults<>();
         ArrayList<Result> list = new ArrayList<>();
+ 
+        // use the name of this history provider
+        String histProvider = getName();
         
-        
+        // the history queries will not use these next two values
+        // however, you can provide them if you want, for your reference
+        String system = "default";
+        String tagProvider = "default";
+    
+    
         TagResult tagResult = new TagResult();
-        tagResult.setDisplayPath(new QualifiedPath.Builder().setTag("Tag1").build());
         tagResult.setType(WellKnownPathTypes.Tag);
         tagResult.setHasChildren(false);
-        tagResult.setPath(new QualifiedPath.Builder().setTag("Tag1").build());
+        
+        String tagPath = "Path/To/Tag";
+        // this will build the fully qualified path: [histProvider/system:tagProvider]tagPath
+        tagResult.setPath(QualifiedPathUtils.toPathFromHistoricalString("[" + histProvider + "/" + system + ":" + tagProvider + "]" + tagPath));
+        
+        tagResult.setDisplayPath(QualifiedPathUtils.parsePossibleTagpath("Tag Display Path"));
+        
         list.add(tagResult);
+        
         
         result.setResults(list);
         result.setResultQuality(TagQuality.GOOD);
